@@ -13,9 +13,9 @@
 
 			$pw = md5($pw);
 
-			$query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pw'");
+			$query = pg_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pw'");
 
-			if(mysqli_num_rows($query) == 1) {
+			if(pg_num_rows($query) == 1) {
 				return true;
 			}
 			else {
@@ -58,7 +58,7 @@
 			$encryptedPw = md5($pw);
 			$date = date("Y-m-d");
 
-			$result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$ad', '$city', '$state', '$zip')");
+			$result = pg_query($this->con, "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$ad', '$city', '$state', '$zip')");
 
 			return $result;
 		}
@@ -70,8 +70,8 @@
 				return;
 			}
 
-			$checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$un'");
-			if(mysqli_num_rows($checkUsernameQuery) != 0) {
+			$checkUsernameQuery = pg_query($this->con, "SELECT username FROM users WHERE username='$un'");
+			if(pg_num_rows($checkUsernameQuery) != 0) {
 				array_push($this->errorArray, Constants::$usernameTaken);
 				return;
 			}
@@ -103,8 +103,8 @@
 				return;
 			}
 
-			$checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$em'");
-			if(mysqli_num_rows($checkEmailQuery) != 0) {
+			$checkEmailQuery = pg_query($this->con, "SELECT email FROM users WHERE email='$em'");
+			if(pg_num_rows($checkEmailQuery) != 0) {
 				array_push($this->errorArray, Constants::$emailTaken);
 				return;
 			}
@@ -156,7 +156,11 @@
 		
 
 		private function validateZip($zip){
-			if(strlen($zip) != 5) {
+			if(preg_match('/[^0-9]/', $zip)){
+				array_push($this->errorArray, Constants::$zipCharacters);
+				return;
+			}
+			if(strlen($zip) != 5 ) {
 				array_push($this->errorArray, Constants::$zipCharacters);
 				return;
 			}
