@@ -17,10 +17,6 @@
 
 ?>
 
-<?php
-    $myPDO = new PDO('pgsql:host=localhost;dbname=d2mamt76u2bal0', 'iutestvgwourup', '489953c5ad03edbb10481c4092319be6eb57668fa54a2352b76c34ca9f312c88');
-?>
-
 <html>
 <head>
 	<title>Welcome to Slotify!</title>
