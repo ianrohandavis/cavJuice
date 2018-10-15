@@ -221,3 +221,7 @@
 
 </body>
 </html>
+
+<?php
+pg_insert ( resource $myPDO , string $table_name , array $assoc_array [, int $options = PGSQL_DML_EXEC ] )
+?>
