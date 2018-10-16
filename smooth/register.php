@@ -19,7 +19,7 @@
 
 <html>
 <head>
-	<title>Welcome to Slotify!</title>
+	<title>Cav Juice</title>
 	<link rel="stylesheet" href="assets/css/register.css">
 	<link rel="stylesheet" href="assets/css/main.css">
 	<script href="assets/js/register.js"></script>
