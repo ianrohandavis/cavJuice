@@ -1,13 +1,3 @@
-cavJuice
-est. 9/24/2018
-Created by Ian Davis, Lars Nordin, and Rachel Goode
-
-This github contains files relating to the design and execution of the Cav Juice website.
-
-The files include code to establish an "About Us" page, a "Contact Us" page, a "Login" sidebar, a "Sign-up" sidebar, and registering capability. There is also code to connect the Cav Juice website to the cav-juice database to store members' information.
-
-We have chosen the design of Helios by HTML5, explained below:
-
 Helios by HTML5 UP
 html5up.net | @ajlkn
 Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)

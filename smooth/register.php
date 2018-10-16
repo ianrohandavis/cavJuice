@@ -21,6 +21,7 @@
 <head>
 	<title>Welcome to Slotify!</title>
 	<link rel="stylesheet" href="assets/css/register.css">
+	<link rel="stylesheet" href="assets/css/main.css">
 	<script href="assets/js/register.js"></script>
 </head>
 <body>
@@ -67,7 +68,7 @@
 			<button type="submit" name="loginButton">LOG IN</button>
 			
 			<div class="hasAccountText">
-						<span id="hideLogin">Don't have an account yet? Signup here.</span>
+						<span id="hideLogin">Don't have an account yet? Signup left.</span>
 					</div>
 
 		</form>
@@ -201,7 +202,7 @@
 			<button type="submit" name="registerButton">SIGN UP</button>
 
 			<div class="hasAccountText">
-						<span id="hideRegister">Already have an account. Sign In.</span>
+						<span id="hideRegister">Already have an account. Sign in right.</span>
 					</div>
 			
 		</form>
@@ -217,7 +218,3 @@
 
 </body>
 </html>
-
-<?php
-pg_insert ( resource $myPDO , string $cavJuiceClients , array $assoc_array [, int $options = PGSQL_DML_EXEC ] )
-?>

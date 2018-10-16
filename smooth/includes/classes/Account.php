@@ -131,8 +131,8 @@
 		}
 
 		private function validateAddress($ad) {
-			$nn = "^[-a-z0-9 ,#'\/.]{3,50}$";
-			if(!preg_match('/[A-Za-z0-9# \.]+$/', $ad)) {
+			
+			if(!preg_match('/[#]?[0-9]+\ [A-Za-z]*\ ?[A-Za-z]*\.?/', $ad)) {
 				array_push($this->errorArray, Constants::$addressInvalid);
 				return;
 			}
@@ -156,7 +156,11 @@
 		
 
 		private function validateZip($zip){
-			if(strlen($zip) != 5) {
+			if(preg_match('/[^0-9]/', $zip)){
+				array_push($this->errorArray, Constants::$zipCharacters);
+				return;
+			}
+			if(strlen($zip) != 5 ) {
 				array_push($this->errorArray, Constants::$zipCharacters);
 				return;
 			}
