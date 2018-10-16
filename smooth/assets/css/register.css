@@ -3,12 +3,11 @@ body {
     padding: 0;
     margin: 0;
     height: 100%;
-    color: #fff;
+    color: black;
 }
 
 #background {
     /*background-color: #000;*/
-    background-image: url(../../images/bg.jpg);
     background-position: center;
     background-size: cover;
     display: table;
@@ -43,9 +42,9 @@ body {
 
 #inputContainer button {
     background-color: transparent;
-    border: 2px solid #fff;
+    border: 2px solid black;
     border-radius: 0;
-    color: white;
+    color: black;
     display: block;
     font-size: 14px;
     letter-spacing: 1px;
@@ -59,20 +58,20 @@ body {
 }
 
 .hasAccountText span {
-    color: white;
+    color: black;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 18px;
     cursor: pointer;
 }
 
 .hasAccountText {
     text-align: center;
-    color: white;
+    color: black;
 }
 
 #inputContainer .errorMessage {
     color: #07d159;
-    font-size: 12px;
+    font-size: 25px;
     display: block;
 }
 

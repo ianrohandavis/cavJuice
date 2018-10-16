@@ -13,9 +13,9 @@
 
 			$pw = md5($pw);
 
-			$query = pg_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pw'");
+			$query = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$pw'");
 
-			if(pg_num_rows($query) == 1) {
+			if(mysqli_num_rows($query) == 1) {
 				return true;
 			}
 			else {
@@ -58,7 +58,7 @@
 			$encryptedPw = md5($pw);
 			$date = date("Y-m-d");
 
-			$result = pg_query($this->con, "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$ad', '$city', '$state', '$zip')");
+			$result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$ad', '$city', '$state', '$zip')");
 
 			return $result;
 		}
@@ -70,8 +70,8 @@
 				return;
 			}
 
-			$checkUsernameQuery = pg_query($this->con, "SELECT username FROM users WHERE username='$un'");
-			if(pg_num_rows($checkUsernameQuery) != 0) {
+			$checkUsernameQuery = mysqli_query($this->con, "SELECT username FROM users WHERE username='$un'");
+			if(mysqli_num_rows($checkUsernameQuery) != 0) {
 				array_push($this->errorArray, Constants::$usernameTaken);
 				return;
 			}
@@ -103,8 +103,8 @@
 				return;
 			}
 
-			$checkEmailQuery = pg_query($this->con, "SELECT email FROM users WHERE email='$em'");
-			if(pg_num_rows($checkEmailQuery) != 0) {
+			$checkEmailQuery = mysqli_query($this->con, "SELECT email FROM users WHERE email='$em'");
+			if(mysqli_num_rows($checkEmailQuery) != 0) {
 				array_push($this->errorArray, Constants::$emailTaken);
 				return;
 			}
@@ -131,8 +131,8 @@
 		}
 
 		private function validateAddress($ad) {
-			$nn = "^[-a-z0-9 ,#'\/.]{3,50}$";
-			if(!preg_match('/[A-Za-z0-9# \.]+$/', $ad)) {
+			
+			if(!preg_match('/[#]?[0-9]+\ [A-Za-z]*\ ?[A-Za-z]*\.?/', $ad)) {
 				array_push($this->errorArray, Constants::$addressInvalid);
 				return;
 			}
