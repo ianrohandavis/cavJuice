@@ -80,6 +80,7 @@
 			<p>
 				<?php echo $account->getError(Constants::$usernameCharacters); ?>
 				<?php echo $account->getError(Constants::$usernameTaken); ?>
+				<?php echo $account->getError(Constants::$usernameAlpha); ?>
 				<label for="username">Username</label>
 				<input id="username" name="username" type="text" placeholder="e.g. bartSimpson" value="<?php getInputValue('username') ?>" required>
 			</p>
