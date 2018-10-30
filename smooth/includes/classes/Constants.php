@@ -15,7 +15,7 @@ class Constants {
 	public static $cityCharacters = "City name must be between 2 and 25 characters";
 	public static $zipCharacters = "Zip must be 5 numbers";
 	public static $stateCharacters = "State name must be between 2 and 25 characters";
-
+	public static $usernameAlpha = "Username must be Alphanumeric";
 	public static $loginFailed = "Your username or password was incorrect";
 
 }
