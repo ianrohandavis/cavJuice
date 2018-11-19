@@ -1,53 +1,42 @@
 <?php 
-
 	include("includes/config.php");
-
 	$name = "";
 	$email ="";
 	$message ="";
-
 	
 	$date = date("Y/m/d");
-
 	function sanitizeFormString($inputText) {
 	$inputText = strip_tags($inputText);
 	$inputText = str_replace(" ", "", $inputText);
 	$inputText = ucfirst(strtolower($inputText));
 	return $inputText;
 }
-
 	function sanitizeFormEmail($inputText) {
 	$inputText = strip_tags($inputText);
 	$inputText = str_replace(" ", "", $inputText);
 	return $inputText;
 }
-
-if(isset($_SESSION['userLoggedIn'])) {
-	$username = $_SESSION['userLoggedIn'];
-
-}
-else {
-	header("Location: register.php");
-}
-
+// if(isset($_SESSION['userLoggedIn'])) {
+// 	$username = $_SESSION['userLoggedIn'];
+// }
+// else {
+// 	header("Location: register.php");
+// }
 if(isset($_POST['submit_5'])){
 		$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','5', '$date')");
 		header("Location: https://test.bitpay.com/invoice?id=Urbcu9TrheB5uG46AM5ppP");
 }else if(isset($_POST['submit_10'])){
 	$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','10', '$date')");
 	header("Location: https://test.bitpay.com/invoice?id=73nGiCVM7rTN3eLgXBCVLG");
+}else if(isset($_POST['submit_promo'])){
+	if($_POST['promo'] == "Juice"){
+		$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','5', '$date')");
+		header("Location: https://test.bitpay.com/invoice?id=73nGiCVM7rTN3eLgXBCVLG");
+}
+}else{
+	
 }
 	
-
-
-
-
-
-
-
-
-
-
  ?>
 
  <!DOCTYPE HTML>
@@ -66,7 +55,6 @@ if(isset($_POST['submit_5'])){
 		<script>
 // Get the modal
 var modal = document.getElementById('id01');
-
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -142,7 +130,18 @@ window.onclick = function(event) {
   									<input type="submit" name="submit_10" value='' src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg"  style="width:210px; background-image: url(https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg)" alt="BitPay, the easy way to pay with bitcoins." >
 								</form>
 
+								<p> Promo code? Enter below: </p>
+								<input type="text" name="promo">
+								<form action="https://test.bitpay.com/checkout" method="post" >
+  									<input type="hidden" name="action" value="checkout" />
+  									<input type="hidden" name="posData" value="" />
+									<input type="hidden" name="data" value="jlSytq8N6SR2jJZl7HNxvBIK7M7VNMl6MS0jL7C9Uu0eoXmmtDjQOd79ysD5yx32TidzTQpQDsI133foLAvhuIm5lE2T11XZi3RCVq49yAF32LUoK2xRvVD2kz9QZKy1" />
+									<input type="submit" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit_promo" style="width:210px; background-image: url(https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg)" alt="BitPay, the easy way to pay with bitcoins." >
 								</form>
+
+								</form>
+
+								<br></br>
 
 								<div>
 									
