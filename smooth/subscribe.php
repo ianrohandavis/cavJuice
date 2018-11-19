@@ -1,4 +1,56 @@
-<!DOCTYPE HTML>
+<?php 
+
+	include("includes/config.php");
+
+	$name = "";
+	$email ="";
+	$message ="";
+
+	
+	$date = date("Y/m/d");
+
+	function sanitizeFormString($inputText) {
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	$inputText = ucfirst(strtolower($inputText));
+	return $inputText;
+}
+
+	function sanitizeFormEmail($inputText) {
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	return $inputText;
+}
+
+if(isset($_SESSION['userLoggedIn'])) {
+	$username = $_SESSION['userLoggedIn'];
+
+}
+else {
+	header("Location: register.php");
+}
+
+if(isset($_POST['submit_5'])){
+		$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','5', '$date')");
+		header("Location: https://test.bitpay.com/invoice?id=Urbcu9TrheB5uG46AM5ppP");
+}else if(isset($_POST['submit_10'])){
+	$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','10', '$date')");
+	header("Location: https://test.bitpay.com/invoice?id=73nGiCVM7rTN3eLgXBCVLG");
+}
+	
+
+
+
+
+
+
+
+
+
+
+ ?>
+
+ <!DOCTYPE HTML>
 <!--
 	Helios by HTML5 UP
 	html5up.net | @ajlkn
@@ -10,6 +62,18 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="no-sidebar is-preload">
@@ -32,8 +96,9 @@
 								<li><a href="index.php">Home</a></li>
 								<li><a href="about-us.html">About Us</a></li>
 								<li><a href="contact.php">Contact Us</a></li>
-								<li><a href="subscribe.html">Subscribe</a></li>
+								<li><a href="subscribe.php">Subscribe</a></li>
 								<li><a href="logout.php">Logout</a></li>
+								<li><a href="login.php">Log In</a></li>
 							</ul>
 						</nav>
 
@@ -58,12 +123,15 @@
 								<p>
 									Cav Juice allows members to subscribe for either the 10 Juices a Month Plan or the 5 Juices a Month Plan. Pick the plan that works best with your life!
 								</p>
+
+
+								<form method="post">
 								<p> 5 Juice per Month Package</p>
 								<form action="https://test.bitpay.com/checkout" method="post" >
   									<input type="hidden" name="action" value="checkout" />
   									<input type="hidden" name="posData" value="" />
   									<input type="hidden" name="data" value="jlSytq8N6SR2jJZl7HNxvBIK7M7VNMl6MS0jL7C9Uu0eoXmmtDjQOd79ysD5yx32ZvF33tYImksor5utYG0HIdrZIAZPTvs5bkPC7nFqvxXALlOJuRJUqmoc+6Vf0/b2Lj08bi+TMLSdkZtLJFHKMOrTBHikqQmU3r919fVDVjg7eUsVKwFdEDZHwhreINBpSiSkOdDN77Bf7sc4m6buqZ60xY4DReu4mQ6exeV/zYA=" />
-  									<input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width:210px;" alt="BitPay, the easy way to pay with bitcoins." >
+  									<input type="submit" name="submit_5" value='' src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg"  style="width:210px; background-image: url(https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg) " alt="BitPay, the easy way to pay with bitcoins." >
 								</form>
 								
 								<p> 10 Juice per Month Package </p>
@@ -71,10 +139,18 @@
   									<input type="hidden" name="action" value="checkout" />
  									<input type="hidden" name="posData" value="" />
 									<input type="hidden" name="data" value="jlSytq8N6SR2jJZl7HNxvBIK7M7VNMl6MS0jL7C9Uu0eoXmmtDjQOd79ysD5yx32XmoJ3xQvXw2pI74k70S9UmayE56sPTiIKTQOn06u0PyqdVFlu6xzuj1ooxf2qzLg+aF4hNvrPiqKtSxez93oAgElcYZDmtEqgyCRXvR+8uoosk6FAkWGEEfRQwjfJCweYU917GyAQexUbIHkTvmAU+b0wZFxVPXx13m4PVzYYp0=" />
-  									<input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width:210px;" alt="BitPay, the easy way to pay with bitcoins." >
+  									<input type="submit" name="submit_10" value='' src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg"  style="width:210px; background-image: url(https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg)" alt="BitPay, the easy way to pay with bitcoins." >
 								</form>
 
+								</form>
 
+								<div>
+									
+									<a href="refund.php"><h3>Request A Refund</h3></a>
+
+								</div>
+
+								
 							</section>
 							<section>
 								<header>

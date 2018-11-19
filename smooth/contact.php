@@ -18,6 +18,13 @@
 	return $inputText;
 }
 
+if(isset($_SESSION['userLoggedIn'])) {
+	
+}
+else {
+	header("Location: register.php");
+}
+
 
 if(isset($_POST['submit'])){
 	
@@ -98,9 +105,12 @@ if(isset($_POST['submit'])){
 						<nav id="nav">
 							<ul>
 								<img src="images/logo.png" width="17px">
-								<li><a href="index.html">Home</a></li>
+								<li><a href="index.php">Home</a></li>
 								<li><a href="about-us.html">About Us</a></li>
-								<li><a href="contact.html">Contact Us</a></li>
+								<li><a href="contact.php">Contact Us</a></li>
+								<li><a href="subscribe.php">Subscribe</a></li>
+								<li><a href="logout.php">Logout</a></li>
+								<li><a href="login.php">Log In</a></li>
 							</ul>
 						</nav>
 

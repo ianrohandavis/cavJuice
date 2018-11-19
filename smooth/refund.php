@@ -1,4 +1,65 @@
-<!DOCTYPE HTML>
+<?php 
+	include("includes/config.php");
+
+	$name = "";
+	$email ="";
+	$message ="";
+
+	function sanitizeFormString($inputText) {
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	$inputText = ucfirst(strtolower($inputText));
+	return $inputText;
+}
+
+	function sanitizeFormEmail($inputText) {
+	$inputText = strip_tags($inputText);
+	$inputText = str_replace(" ", "", $inputText);
+	return $inputText;
+}
+
+if(isset($_SESSION['userLoggedIn'])) {
+	
+}
+else {
+	header("Location: register.php");
+}
+
+
+if(isset($_POST['submit'])){
+	
+	require_once('PHPMailer-master/src/class.phpmailer.php');
+  	require("PHPMailer-master/src/SMTP.php");
+  	require("PHPMailer-master/src/Exception.php");
+
+  	$username = $_POST['username'];
+  	$email = $_POST['email'];
+  	
+
+	$mail = new PHPMailer\PHPMailer\PHPMailer();
+	$mail->setFrom('cavjuice@gmail.com', 'CavJuice Company');
+	$mail->addAddress($email, $name);
+	$mail->AddCC('cavjuice@gmail.com', 'CavJuice Company');
+	$mail->Subject  = 'Refund Request';
+	$mail->Body     = "Your Refund Request has been recieved and is being processed. Review of Request may take up to 4-5 buisness days.";
+	if(!$mail->send()) {
+	  echo 'Message was not sent.';
+	  echo 'Mailer error: ' . $mail->ErrorInfo;
+	} else {
+	  echo 'Message has been sent.';
+	}
+
+	
+
+	$result = mysqli_query($con, "INSERT INTO contact VALUES ('$name', '$email', '$message')");
+
+
+	
+}
+
+ ?>
+
+ <!DOCTYPE HTML>
 <!--
 	Helios by HTML5 UP
 	html5up.net | @ajlkn
@@ -11,8 +72,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://fonts.googleapis.com/css?family=Oleo+Script:400,700" rel="stylesheet">
+   	<link href="https://fonts.googleapis.com/css?family=Teko:400,700" rel="stylesheet">
+   	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+   	<link rel="stylesheet" type="text/css" href="assets/css/contact.css">
+   	<link rel="stylesheet" type="text/css" href="assets/css/main.css">
 	</head>
-	<body class="no-sidebar is-preload">
+	<body class="homepage is-preload">
 		<div id="page-wrapper">
 
 			<!-- Header -->
@@ -21,8 +92,13 @@
 					<!-- Inner -->
 						<div class="inner">
 							<header>
-								<h1><a href="index.html" id="logo">Subscribe</a></h1>
+								<h1><a href="index.html" id="logo">Cav Juice, Inc.</a></h1>
+								<hr />
+								<p>Refunds</p>
 							</header>
+							<footer>
+								<a href="#banner" class="button circled scrolly">Explore</a>
+							</footer>
 						</div>
 
 					<!-- Nav -->
@@ -32,66 +108,44 @@
 								<li><a href="index.php">Home</a></li>
 								<li><a href="about-us.html">About Us</a></li>
 								<li><a href="contact.php">Contact Us</a></li>
-								<li><a href="subscribe.html">Subscribe</a></li>
+								<li><a href="subscribe.php">Subscribe</a></li>
 								<li><a href="logout.php">Logout</a></li>
+								<li><a href="logout.php">Log In</a></li>
 							</ul>
 						</nav>
 
 				</div>
 
-			<!-- Main -->
-				<div class="wrapper style1">
 
-					<div class="container">
-						<article id="main" class="special">
-							<header>
-								<h2><a href="#">Subscribe to receive your smoothies!</a></h2>
-								<p>
-									“A healthy outside starts from the inside.”
-								</p>
-							</header>
-							<!--<a href="#" class="image featured"><img src="images/smoothieAbout.jpg" alt="" /></a>
-							<section>
-								<header>-->
-									<h3>Options:</h3>
-								</header>
-								<p>
-									Cav Juice allows members to subscribe for either the 10 Juices a Month Plan or the 5 Juices a Month Plan. Pick the plan that works best with your life!
-								</p>
-								<p> 5 Juice per Month Package</p>
-								<form action="https://test.bitpay.com/checkout" method="post" >
-  									<input type="hidden" name="action" value="checkout" />
-  									<input type="hidden" name="posData" value="" />
-  									<input type="hidden" name="data" value="jlSytq8N6SR2jJZl7HNxvBIK7M7VNMl6MS0jL7C9Uu0eoXmmtDjQOd79ysD5yx32ZvF33tYImksor5utYG0HIdrZIAZPTvs5bkPC7nFqvxXALlOJuRJUqmoc+6Vf0/b2Lj08bi+TMLSdkZtLJFHKMOrTBHikqQmU3r919fVDVjg7eUsVKwFdEDZHwhreINBpSiSkOdDN77Bf7sc4m6buqZ60xY4DReu4mQ6exeV/zYA=" />
-  									<input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width:210px;" alt="BitPay, the easy way to pay with bitcoins." >
-								</form>
-								
-								<p> 10 Juice per Month Package </p>
-								<form action="https://test.bitpay.com/checkout" method="post" >
-  									<input type="hidden" name="action" value="checkout" />
- 									<input type="hidden" name="posData" value="" />
-									<input type="hidden" name="data" value="jlSytq8N6SR2jJZl7HNxvBIK7M7VNMl6MS0jL7C9Uu0eoXmmtDjQOd79ysD5yx32XmoJ3xQvXw2pI74k70S9UmayE56sPTiIKTQOn06u0PyqdVFlu6xzuj1ooxf2qzLg+aF4hNvrPiqKtSxez93oAgElcYZDmtEqgyCRXvR+8uoosk6FAkWGEEfRQwjfJCweYU917GyAQexUbIHkTvmAU+b0wZFxVPXx13m4PVzYYp0=" />
-  									<input type="image" src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg" name="submit" style="width:210px;" alt="BitPay, the easy way to pay with bitcoins." >
-								</form>
+  
+<section id="contact">
+			<div class="container">
+				<form action="refund.php" method="POST">
+					<div class="col-md-6 form-line">
+			  			<div class="form-group">
+			  				<label for="exampleInputUsername" >Username</label>
+					    	<input type="text" name="username" class="form-control" id="" placeholder=" Enter Name">
+				  		</div>
+				  		<div class="form-group">
+					    	<label for="exampleInputEmail" >Email Address</label>
+					    	<input name="email" type="email" class="form-control" id="exampleInputEmail" placeholder=" Enter Email id">
+					  	</div>	
+					  	<!-- <div class="form-group">
+					    	<label for="telephone" name="number">Mobile No.</label>
+					    	<input type="tel" class="form-control" id="telephone" placeholder=" Enter 10-digit mobile no.">
+			  			</div> -->
 
+			  			<div>
 
-							</section>
-							<section>
-								<header>
-									<h3>Fresh Juice Made In-House</h3>
-								</header>
-								<p>
-									We love bring you the freshest juice, right from the kitchen squeezed in front of you. Not only do we grow the fruit in our local garden we harvest and blend those fruits in our satte of the art kitcehn.
-								</p>
-							</section>
-						</article>
-						<hr />
-						
-					</div>
+			  				<button type="submit" name="submit" class="btn btn-default submit"><i class="fa fa-paper-plane" aria-hidden="true" style="color: black"></i>  Request Refund</button>
+			  			</div>
+			  		</div>
+			  		
+				</form>
+			</div>
+		</section>
 
-				</div>
-
-			<!-- Footer -->
+		<!-- Footer -->
 				<div id="footer">
 					<div class="container">
 						<div class="row">
@@ -233,9 +287,7 @@
 
 		</div>
 
-
-
-		<!-- Scripts -->
+						<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -244,6 +296,3 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
