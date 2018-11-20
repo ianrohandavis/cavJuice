@@ -22,18 +22,19 @@ if(isset($_SESSION['userLoggedIn'])) {
 else {
 	header("Location: register.php");
 }
+// }
 if(isset($_POST['submit_5'])){
-		$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','50', '$date')");
-		header("Location: https://test.bitpay.com/invoice?id=Urbcu9TrheB5uG46AM5ppP");
+		$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','5', '$date')");
+		header("Location: https://test.bitpay.com/invoice?id=EWLaY3VGBea8nDmNW5KbvH");
 		// 
 		
 }
-if(isset($_POST['submit_10'])){
+else if(isset($_POST['submit_10'])){
 	$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','10', '$date')");
 	header("Location: https://test.bitpay.com/invoice?id=73nGiCVM7rTN3eLgXBCVLG");
 }
 
-if(isset($_POST['submit_promo'])){
+else if(isset($_POST['submit_promo'])){
 	if($_POST['promo'] == "Juice"){
 		$query = mysqli_query($con, "INSERT INTO purchaseHistory VALUES ('$username','1', '$date')");
 		header("Location: https://test.bitpay.com/invoice?id=73nGiCVM7rTN3eLgXBCVLG");
@@ -41,6 +42,7 @@ if(isset($_POST['submit_promo'])){
 	header("Location subscribe.php");
 }
 }
+ 
 
 
 	
@@ -129,15 +131,16 @@ window.onclick = function(event) {
   									<input type="hidden" name="posData" value="" />
   									<input type="hidden" name="data" value="jlSytq8N6SR2jJZl7HNxvBIK7M7VNMl6MS0jL7C9Uu0eoXmmtDjQOd79ysD5yx32ZvF33tYImksor5utYG0HIdrZIAZPTvs5bkPC7nFqvxXALlOJuRJUqmoc+6Vf0/b2Lj08bi+TMLSdkZtLJFHKMOrTBHikqQmU3r919fVDVjg7eUsVKwFdEDZHwhreINBpSiSkOdDN77Bf7sc4m6buqZ60xY4DReu4mQ6exeV/zYA=" />
   									<input type="submit" name="submit_5" value='' src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg"  style="width:210px; background-image: url(https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg) " alt="BitPay, the easy way to pay with bitcoins." >
-								</form>
-								
-								<p> 10 Juice per Month Package </p>
-								<form action="https://test.bitpay.com/checkout" method="post" >
+
+  									<br>
+  									<p> 10 Juice per Month Package </p>
   									<input type="hidden" name="action" value="checkout" />
  									<input type="hidden" name="posData" value="" />
 									<input type="hidden" name="data" value="jlSytq8N6SR2jJZl7HNxvBIK7M7VNMl6MS0jL7C9Uu0eoXmmtDjQOd79ysD5yx32XmoJ3xQvXw2pI74k70S9UmayE56sPTiIKTQOn06u0PyqdVFlu6xzuj1ooxf2qzLg+aF4hNvrPiqKtSxez93oAgElcYZDmtEqgyCRXvR+8uoosk6FAkWGEEfRQwjfJCweYU917GyAQexUbIHkTvmAU+b0wZFxVPXx13m4PVzYYp0=" />
   									<input type="submit" name="submit_10" value='' src="https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg"  style="width:210px; background-image: url(https://test.bitpay.com/cdn/en_US/bp-btn-pay-currencies.svg)" alt="BitPay, the easy way to pay with bitcoins." >
 								</form>
+								
+								
 
 								<p> Promo code? Enter below: </p>
 								<input type="text" name="promo">
